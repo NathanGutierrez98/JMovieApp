@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+<LinearLayout
+    android:orientation="vertical"
+
+
+
+    android:background="@color/gris"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/logo"
+        android:layout_gravity="center"
+        android:contentDescription="Logo de JMovieApp"
+
+        />
+
+    <EditText
+        android:id="@+id/txtNombre"
+        android:layout_marginTop="40dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_width="match_parent"
+        android:gravity="center_horizontal"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edittext_login"
+        android:ems="10"
+        android:hint="Nombre"
+
+        android:inputType="textPersonName"
+        android:paddingTop="40dp"
+
+        android:layout_marginBottom="10dp"/>
+
+    <EditText
+        android:id="@+id/txtApellidos"
+        android:layout_marginTop="40dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_width="match_parent"
+        android:gravity="center_horizontal"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edittext_login"
+        android:ems="10"
+        android:hint="Apellidos"
+
+        android:inputType="textPersonName"
+        android:paddingTop="40dp"
+
+        android:layout_marginBottom="10dp"/>
+
+    <EditText
+        android:id="@+id/txtCorreo"
+        android:layout_marginTop="40dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_width="match_parent"
+        android:gravity="center_horizontal"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edittext_login"
+        android:ems="10"
+        android:hint="Correo electrónico"
+
+        android:inputType="textPersonName"
+        android:paddingTop="40dp"
+
+        android:layout_marginBottom="10dp"/>
+    <EditText
+        android:id="@+id/txtUsuario"
+        android:layout_marginTop="40dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_width="match_parent"
+        android:gravity="center_horizontal"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edittext_login"
+        android:ems="10"
+        android:hint="Nombre de Usuario"
+
+        android:inputType="textPersonName"
+        android:paddingTop="40dp"
+
+        android:layout_marginBottom="10dp"/>
+    <EditText
+
+        android:layout_marginTop="40dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:id="@+id/txtPassword"
+        android:gravity="center_horizontal"
+        android:background="@drawable/edittext_login"
+        android:layout_width="match_parent"
+
+        android:layout_height="wrap_content"
+        android:ems="10"
+
+        android:hint="Contraseña"
+        android:inputType="textPassword"
+        android:paddingTop="40dp"
+        android:layout_marginBottom="10dp"/>
+
+    <EditText
+        android:layout_marginTop="40dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:id="@+id/txtPassword2"
+        android:gravity="center_horizontal"
+        android:background="@drawable/edittext_login"
+        android:layout_width="match_parent"
+
+        android:layout_height="wrap_content"
+        android:ems="10"
+
+        android:hint="Contraseña"
+        android:inputType="textPassword"
+        android:paddingTop="40dp"
+        android:layout_marginBottom="10dp"/>
+
+    <Button
+        android:layout_marginTop="40dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:id="@+id/btnRegistro"
+        android:background="@drawable/buttonlogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:text="Registrar" />
+
+
+</LinearLayout>
+</ScrollView>
