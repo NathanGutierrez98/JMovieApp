@@ -1,12 +1,21 @@
 package proyecto.nathan.jmovieapp;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 
 public class RegistroUsuario extends AppCompatActivity {
 private EditText txtNombre;
@@ -63,6 +72,10 @@ private Button btnRegistro;
                 String resultado = cbdd.guardar(usuario);
                 Toast.makeText(getBaseContext(), resultado,
                         Toast.LENGTH_LONG).show();
+                if(resultado.equals("Ingresado Correctamente")){
+
+                    obtenerToken(usuario);
+                }
                 cbdd.close();
 
             }
@@ -91,6 +104,33 @@ private Button btnRegistro;
             return false;
         }
         return true;
+    }
+
+    private void obtenerToken(Usuario usuario){
+        String url = "http://www.omdbapi.com/apikey.aspx?__VIEWSTATE=%2FwEPDwUKLTIwNDY4MTIzNQ9kFgYCAQ9kFggCAQ8QDxYCHgdDaGVja2VkaGRkZGQCAw8QDxYCHwBnZGRkZAIFDxYCHgdWaXNpYmxlaGQCBw8WAh8BZ2QCAg8WAh8BZxYCAgEPDxYCHgRUZXh0BUtBIHZlcmlmaWNhdGlvbiBsaW5rIHRvIGFjdGl2YXRlIHlvdXIga2V5IHdhcyBzZW50IHRvOiBuYXRoYW5ndXQ5OEBnbWFpbC5jb21kZAIDDxYCHwFoZBgBBR5fX0NvbnRyb2xzUmVxdWlyZVBvc3RCYWNrS2V5X18WAwULcGF0cmVvbkFjY3QFC3BhdHJlb25BY2N0BQhmcmVlQWNjdDckTIIITKzdw3r%2BfWhkbZE%2BtCAG4rQpx8arAzbus0ht&__VIEWSTATEGENERATOR=5E550F58&__EVENTVALIDATION=%2FwEdAAj09WVq39%2FmYiBQWH0q7TeQmSzhXfnlWWVdWIamVouVTzfZJuQDpLVS6HZFWq5fYphdL1XrNEjnC%2FKjNya%2Bmqh8hRPnM5dWgso2y7bj7kVNLSFbtYIt24Lw6ktxrd5Z67%2F4LFSTzFfbXTFN5VgQX9Nbzfg78Z8BXhXifTCAVkevd%2FNWy%2BK4CxZOz5c%2Fli8qlS7FL2aBd9SS6XAIAaB8oDW0&at=freeAcct&Email2="+usuario.getCorreo() + "&FirstName="+usuario.getNombre() +"&LastName=" + usuario.getApellidos() + "&TextArea1=Usoeducativo&Button1=Submit";
+
+
+        RequestQueue q = Volley.newRequestQueue(this);
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Log.d("e",response);
+
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                    }
+                }
+
+        );
+
+        q.add(stringRequest);
     }
 }
 
