@@ -1,4 +1,42 @@
 <resources>
-    <string name="app_name">JMovieApp</string>
+    <string name="appname">JMovieApp</string>
     <string name="registro">http://www.omdbapi.com/apikey.aspx?__VIEWSTATE=%2FwEPDwUKLTIwNDY4MTIzNQ9kFgYCAQ9kFggCAQ8QDxYCHgdDaGVja2VkaGRkZGQCAw8QDxYCHwBnZGRkZAIFDxYCHgdWaXNpYmxlaGQCBw8WAh8BZ2QCAg8WAh8BZxYCAgEPDxYCHgRUZXh0BUtBIHZlcmlmaWNhdGlvbiBsaW5rIHRvIGFjdGl2YXRlIHlvdXIga2V5IHdhcyBzZW50IHRvOiBuYXRoYW5ndXQ5OEBnbWFpbC5jb21kZAIDDxYCHwFoZBgBBR5fX0NvbnRyb2xzUmVxdWlyZVBvc3RCYWNrS2V5X18WAwULcGF0cmVvbkFjY3QFC3BhdHJlb25BY2N0BQhmcmVlQWNjdDckTIIITKzdw3r%2BfWhkbZE%2BtCAG4rQpx8arAzbus0ht&amp;__VIEWSTATEGENERATOR=5E550F58&amp;__EVENTVALIDATION=%2FwEdAAj09WVq39%2FmYiBQWH0q7TeQmSzhXfnlWWVdWIamVouVTzfZJuQDpLVS6HZFWq5fYphdL1XrNEjnC%2FKjNya%2Bmqh8hRPnM5dWgso2y7bj7kVNLSFbtYIt24Lw6ktxrd5Z67%2F4LFSTzFfbXTFN5VgQX9Nbzfg78Z8BXhXifTCAVkevd%2FNWy%2BK4CxZOz5c%2Fli8qlS7FL2aBd9SS6XAIAaB8oDW0&amp;at=freeAcct&amp;Email2=%1$s&amp;FirstName=%1$s&amp;LastName=%1$s&amp;TextArea1=Usoeducativo&amp;Button1=Submit</string>
+
+
+    <string name="action_settings">Settings</string>
+
+    <string name="home_item">Home</string>
+    <string name="productos_item">Productos</string>
+    <string name="compras_item">Carrito</string>
+    <string name="ordenes_item">Ordenes</string>
+    <string name="facturas_item">Facturas</string>
+    <string name="log_out_item">Cerrar Sesión</string>
+    <string name="configuracion_item">Configuración</string>
+
+    <string name="app_name">Intro Slider</string>
+    <string name="title_activity_welcome">Home Screen</string>
+    <string name="next">Siguiente</string>
+    <string name="skip">Omitir</string>
+    <string name="start">GOT IT</string>
+
+    <string name="slide_1_title">Hello Food!</string>
+    <string name="slide_1_desc">The easiest way to order food from your favourite restaurant!</string>
+
+    <string name="slide_2_title">Movie Tickets</string>
+    <string name="slide_2_desc">Book movie tickets for your family and friends!</string>
+
+    <string name="slide_3_title">Great Discounts</string>
+    <string name="slide_3_desc">Best discounts on every single service we offer!</string>
+
+    <string name="slide_4_title">World Travel</string>
+    <string name="slide_4_desc">Book tickets of any transportation and travel the world!</string>
+
+    <string name="play_again_desc">To see the welcome slider again, goto Settings -> apps -> welcome slider -> clear data</string>
+    <string name="play_again">Play Again</string>
+    <string name="favoritas_item">Favoritas</string>
+    <string name="pendientes_item">Pendientes por ver</string>
+    <string name="yavistas_item">Ya vistas</string>
+    <string name="buscar">Buscar series o películas</string>
+    <string name="add_api_key">Añadir API KEY</string>
 </resources>
+

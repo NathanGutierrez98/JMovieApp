@@ -1,6 +1,5 @@
 package proyecto.nathan.jmovieapp;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -19,9 +18,9 @@ public class LoginUsuario extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setTheme(R.style.AppTheme);
         setContentView(R.layout.loginusuario);
-        txtUsuario = findViewById(R.id.txtUsuCorreo);
+        txtUsuario = findViewById(R.id.txtToken);
         txtContrasenia = findViewById(R.id.txtContrasenia);
-        btnLogin = findViewById(R.id.btnLogin);
+        btnLogin = findViewById(R.id.btnToken);
         txtRegistrate = findViewById(R.id.txtRegistrate);
         txtRegistrate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -37,7 +36,10 @@ public class LoginUsuario extends AppCompatActivity {
                 if(!txtUsuario.getText().toString().equals("") && !txtContrasenia.getText().toString().equals("")){
                     ConexionBBDD cbdd = new ConexionBBDD(getApplicationContext());
                     if(cbdd.login(txtUsuario.getText().toString(),EncriptarClaves.encriptarClaves(txtContrasenia.getText().toString()))){
+
+
                         Intent i = new Intent(v.getContext(),MainActivity.class);
+                        i.putExtra("nombreUsuario",cbdd.getUsuarioCorreo(txtUsuario.getText().toString()));
                         startActivity(i);
                     }
                 }

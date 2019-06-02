@@ -1,12 +1,17 @@
 package proyecto.nathan.jmovieapp;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import java.io.IOException;
@@ -20,10 +25,16 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class AdapterDatos extends RecyclerView.Adapter<AdapterDatos.ViewHolderDatos> implements View.OnClickListener {
     static ArrayList<Pelicula> listDatos;
+    private Context mCtx;
     private View.OnClickListener listener;
+    private View.OnLongClickListener listenerLong;
+    private String nombreUsuario;
+    private String correoUsuario;
     int posicion;
-    public AdapterDatos(ArrayList<Pelicula> listDatos) {
-        this.listDatos = listDatos;
+    public AdapterDatos(ArrayList<Pelicula> listDatos, Context mCtx, String nombreUsuario, String correoUsuario) {
+        this.listDatos = listDatos;   this.mCtx = mCtx;
+        this.nombreUsuario = nombreUsuario;
+        this.correoUsuario = correoUsuario;
     }
 
 
@@ -33,13 +44,54 @@ public class AdapterDatos extends RecyclerView.Adapter<AdapterDatos.ViewHolderDa
 
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.mostrarpeli,viewGroup,false);
         view.setOnClickListener(this);
+
+
+
         return new ViewHolderDatos(view);
 
     }
 
     @Override
-    public void onBindViewHolder(@NonNull AdapterDatos.ViewHolderDatos viewHolderDatos, int i) {
+    public void onBindViewHolder(@NonNull final AdapterDatos.ViewHolderDatos viewHolderDatos, int i) {
         viewHolderDatos.asignarDatos(listDatos.get(i));
+        final int posicion = i;
+        viewHolderDatos.buttonViewOption.setOnClickListener(new View.OnClickListener() {
+
+       ViewHolderDatos v = viewHolderDatos;
+            @Override
+            public void onClick(final View view) {
+
+                //creating a popup menu
+                PopupMenu popup = new PopupMenu(mCtx, v.buttonViewOption);
+                //inflating menu from xml resource
+                popup.inflate(R.menu.opcion_menu);
+                //adding click listener
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        switch (item.getItemId()) {
+                            case R.id.menuFav:
+                                ConexionBBDD cbd = new ConexionBBDD(view.getContext());
+
+                                cbd.anadirFavoritas(correoUsuario,listDatos.get(posicion).getId());
+
+
+                                break;
+                            case R.id.menuVer:
+                                cbd = new ConexionBBDD(view.getContext());
+
+                                cbd.anadirPendientes(nombreUsuario,listDatos.get(posicion).getId());
+
+                                break;
+                        }
+                        return false;
+                    }
+                });
+                //displaying the popup
+                popup.show();
+
+            }
+        });
 
 
 
@@ -56,6 +108,13 @@ public class AdapterDatos extends RecyclerView.Adapter<AdapterDatos.ViewHolderDa
         this.listener = listener;
     }
 
+    public void setOnLongClickLisetner(View.OnLongClickListener listener){
+        this.listenerLong = listener;
+    }
+
+    public boolean onLongClick(View v) {
+        return false;
+    }
     @Override
     public void onClick(View v) {
     if(listener != null){
@@ -65,13 +124,17 @@ public class AdapterDatos extends RecyclerView.Adapter<AdapterDatos.ViewHolderDa
 
 
 
+
+
     public class ViewHolderDatos extends RecyclerView.ViewHolder {
         TextView titulo;
         CircleImageView imagen;
+        TextView buttonViewOption;
         public ViewHolderDatos(@NonNull View itemView) {
             super(itemView);
             imagen = itemView.findViewById(R.id.imagen);
             titulo = itemView.findViewById(R.id.titulo);
+            buttonViewOption = (TextView) itemView.findViewById(R.id.textViewOptions);
         }
 
 

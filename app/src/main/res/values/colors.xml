@@ -8,5 +8,28 @@
     <color name="blanco">#ffffff</color>
     <color name="colorLogin">#D340D2EE</color>
     <color name="amarillo">#FFEB3B</color>
-    <color name="naranja">#F07C32</color>
+    <color name="naranja">#F07C32</color>+
+    <color name="window_background">#FFF5F5F5</color>
+
+    <color name="primaryColor">#346D7D</color>
+    <color name="primaryDarkColor">#1F515F</color>
+    <color name="accentColor">#03A9F4</color>
+
+    <color name="screen1">#F4B244</color>
+    <color name="screen2">#19BB80</color>
+    <color name="screen3">#9C27B0</color>
+
+    <array name="dot_on_page_active">
+        <item>#B71C1C</item>
+        <item>#8BC34A</item>
+        <item>#4A148C</item>
+
+    </array>
+
+    <array name="dot_on_page_not_active">
+        <item>#FF5252</item>
+        <item>#CCFF90</item>
+        <item>#E040FB</item>
+    </array>
+    <color name="viewBg">#f1f5f8</color>
 </resources>

@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 public class Pelicula implements Serializable {
+    String id;
     String titulo;
     String anio;
     String duracion;
@@ -16,15 +17,10 @@ public class Pelicula implements Serializable {
     String director;
     String genero;
 
-    public String getDirector() {
-        return director;
-    }
 
-    public void setDirector(String director) {
-        this.director = director;
-    }
 
-    public Pelicula(String titulo, String anio, String duracion, String lanzamiento, String lenguaje, String pais, String imagen, String descripcion, String guion, String director, String genero) {
+    public Pelicula(String id, String titulo, String anio, String duracion, String lanzamiento, String lenguaje, String pais, String imagen, String descripcion, String guion, String director, String genero) {
+        this.id = id;
         this.titulo = titulo;
         this.anio = anio;
         this.duracion = duracion;
@@ -36,6 +32,17 @@ public class Pelicula implements Serializable {
         this.genero = genero;
         this.guion = guion;
         this.director = director;
+    }
+
+    public Pelicula(String id,String titulo, String anio, String imagen) {
+        this.id = id;
+        this.titulo = titulo;
+        this.anio = anio;
+        this.imagen = imagen;
+
+    }
+    public Pelicula(){
+
     }
 
     public String getDuracion() {
@@ -116,6 +123,22 @@ public class Pelicula implements Serializable {
 
     public void setGenero(String genero) {
         this.genero = genero;
+    }
+
+    public String getDirector() {
+        return director;
+    }
+
+    public void setDirector(String director) {
+        this.director = director;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     @Override

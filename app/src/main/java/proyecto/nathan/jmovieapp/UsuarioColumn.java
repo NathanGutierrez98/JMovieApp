@@ -12,5 +12,6 @@ public class UsuarioColumn {
         public static final String NOMBRE = "NOMBRE";
         public static final String APELLIDOS = "APELLIDOS";
         public static final String CORREO = "CORREO";
+        public static final String TOKEN = "TOKEN";
     }
 }

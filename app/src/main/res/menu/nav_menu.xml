@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/buscar"
+            android:icon="@android:drawable/ic_search_category_default"
+            android:title="@string/buscar" />
+        <item
+            android:id="@+id/nav_favoritas"
+            android:icon="@android:drawable/star_off"
+            android:title="@string/favoritas_item" />
+        <item
+            android:id="@+id/nav_pendientes"
+            android:icon="@android:drawable/ic_menu_agenda"
+            android:title="@string/pendientes_item" />
+
+        <!-- Sección de configuración -->
+        <item
+            android:id="@+id/configuration_section"
+            android:title="@string/configuracion_item">
+            <menu>
+                <item
+                    android:id="@+id/nav_log_out"
+                    android:icon="@android:drawable/ic_lock_power_off"
+                    android:title="@string/log_out_item" />
+                <item
+                    android:id="@+id/nav_add_apikey"
+                    android:icon="@android:drawable/ic_menu_add"
+                    android:title="@string/add_api_key" />
+            </menu>
+        </item>
+    </group>
+
+</menu>

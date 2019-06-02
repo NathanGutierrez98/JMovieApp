@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    >
 <LinearLayout
     android:orientation="vertical"
-
-
-
     android:background="@color/gris"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     >
 
 
@@ -23,15 +21,26 @@
 
         />
 
+
+    <android.support.design.widget.TextInputLayout
+
+        android:layout_marginTop="20dp"
+        android:theme="@style/EditTextHint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+       >
     <EditText
+        android:theme="@style/EditTextHint"
+        android:background="@drawable/edittext_login"
         android:id="@+id/txtNombre"
         android:layout_marginTop="40dp"
         android:layout_marginLeft="40dp"
         android:layout_marginRight="40dp"
+        android:singleLine="true"
         android:layout_width="match_parent"
-        android:gravity="center_horizontal"
+        android:gravity="center"
         android:layout_height="wrap_content"
-        android:background="@drawable/edittext_login"
         android:ems="10"
         android:hint="Nombre"
 
@@ -40,6 +49,12 @@
 
         android:layout_marginBottom="10dp"/>
 
+   </android.support.design.widget.TextInputLayout>
+    <android.support.design.widget.TextInputLayout
+        android:layout_marginTop="20dp"
+        android:theme="@style/EditTextHint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
     <EditText
         android:id="@+id/txtApellidos"
         android:layout_marginTop="40dp"
@@ -57,6 +72,12 @@
 
         android:layout_marginBottom="10dp"/>
 
+    </android.support.design.widget.TextInputLayout>
+    <android.support.design.widget.TextInputLayout
+        android:layout_marginTop="20dp"
+        android:theme="@style/EditTextHint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
     <EditText
         android:id="@+id/txtCorreo"
         android:layout_marginTop="40dp"
@@ -73,6 +94,13 @@
         android:paddingTop="40dp"
 
         android:layout_marginBottom="10dp"/>
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_marginTop="20dp"
+        android:theme="@style/EditTextHint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
     <EditText
         android:id="@+id/txtUsuario"
         android:layout_marginTop="40dp"
@@ -89,6 +117,13 @@
         android:paddingTop="40dp"
 
         android:layout_marginBottom="10dp"/>
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_marginTop="20dp"
+        android:theme="@style/EditTextHint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
     <EditText
 
         android:layout_marginTop="40dp"
@@ -106,9 +141,14 @@
         android:inputType="textPassword"
         android:paddingTop="40dp"
         android:layout_marginBottom="10dp"/>
-
+    </android.support.design.widget.TextInputLayout>
+    <android.support.design.widget.TextInputLayout
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:theme="@style/EditTextHint"
+        android:layout_height="wrap_content">
     <EditText
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="60dp"
         android:layout_marginLeft="40dp"
         android:layout_marginRight="40dp"
         android:id="@+id/txtPassword2"
@@ -123,9 +163,10 @@
         android:inputType="textPassword"
         android:paddingTop="40dp"
         android:layout_marginBottom="10dp"/>
-
+    </android.support.design.widget.TextInputLayout>
     <Button
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="70dp"
+        android:layout_marginBottom="70dp"
         android:layout_marginLeft="40dp"
         android:layout_marginRight="40dp"
         android:id="@+id/btnRegistro"

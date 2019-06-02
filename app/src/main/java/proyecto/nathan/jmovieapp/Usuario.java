@@ -15,6 +15,7 @@ public class Usuario {
         this.apellidos = apellidos;
         this.contrasenia = contrasenia;
         this.correo = correo;
+
     }
 
 
@@ -58,6 +59,8 @@ public class Usuario {
     public void setUsuario(String usuario) {
         this.usuario = usuario;
     }
+
+
 
 
 }

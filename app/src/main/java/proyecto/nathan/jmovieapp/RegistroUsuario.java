@@ -1,13 +1,17 @@
 package proyecto.nathan.jmovieapp;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -72,7 +76,7 @@ private Button btnRegistro;
                 String resultado = cbdd.guardar(usuario);
                 Toast.makeText(getBaseContext(), resultado,
                         Toast.LENGTH_LONG).show();
-                if(resultado.equals("Ingresado Correctamente")){
+                if(resultado.equals("Registrado correctamente, ya puede iniciar sesión")){
 
                     obtenerToken(usuario);
                 }
@@ -116,7 +120,7 @@ private Button btnRegistro;
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Log.d("e",response);
+                String a = response;
 
 
                     }
@@ -131,6 +135,10 @@ private Button btnRegistro;
         );
 
         q.add(stringRequest);
+
+        Intent i = new Intent(RegistroUsuario.this, TutorialToken.class);
+        startActivity(i);
+        finish();
     }
 }
 
