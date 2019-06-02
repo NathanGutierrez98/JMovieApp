@@ -72,27 +72,6 @@ public class Favoritas extends AppCompatActivity {
         listaFavoritas = new ArrayList<Pelicula>();
         setContentView(R.layout.favoritas);
         ocultarUI();
-        findViewById(R.id.favoritas_content).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ocultarUI();
-            }
-        });
-        busqueda = findViewById(R.id.busqueda);
-
-        busqueda.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-                                            @Override
-                                            public boolean onQueryTextSubmit(String s) {
-                                               // metodoJSON();
-                                                return true;
-                                            }
-
-                                            @Override
-                                            public boolean onQueryTextChange(String s) {
-                                                return false;
-                                            }
-                                        }
-        );
 
         setToolbar(); // Setear Toolbar como action bar
 
@@ -214,7 +193,6 @@ public class Favoritas extends AppCompatActivity {
             final Pelicula[] pelicula = {null};
             final boolean[] encontrado = {false};
             String url = "http://www.omdbapi.com/";
-            String parametro = busqueda.getQuery().toString();
             String resultado;
             String urlFinal = "http://www.omdbapi.com/?i=" + listaPelisFav.get(i) + "&apikey=" + apikey;
             RequestQueue q = Volley.newRequestQueue(this);
@@ -312,18 +290,24 @@ public class Favoritas extends AppCompatActivity {
                         // Marcar item presionado
 
                         switch (menuItem.toString()) {
-                            case "Favoritas":
-                                Intent i = new Intent(navigationView.getContext(),Favoritas.class);
-                                String[] valores = {nav_user.getText().toString(),nav_correo.getText().toString()};
-                                i.putExtra("nombreUsuario",valores);
-                                startActivity(i);
+                            case "Añadir API KEY":
+                                Intent y = new Intent(navigationView.getContext(),AgregarToken.class);
+                                String[] valoresy = {nav_user.getText().toString(),nav_correo.getText().toString()};
+                                y.putExtra("nombreUsuario",valoresy);
+                                startActivity(y);
+                                return true;
+                            case "Pendientes por ver":
+                                Intent z = new Intent(navigationView.getContext(),Pendientes.class);
+                                String[] valoresz = {nav_user.getText().toString(),nav_correo.getText().toString()};
+                                z.putExtra("nombreUsuario",valoresz);
+                                startActivity(z);
                                 return true;
 
                             case "Buscar series o películas":
-                                Intent y = new Intent(navigationView.getContext(),MainActivity.class);
-                                String[] valoresY = {nav_user.getText().toString(),nav_correo.getText().toString()};
-                                y.putExtra("nombreUsuario",valoresY);
-                                startActivity(y);
+                                Intent x = new Intent(navigationView.getContext(),MainActivity.class);
+                                String[] valoresx = {nav_user.getText().toString(),nav_correo.getText().toString()};
+                                x.putExtra("nombreUsuario",valoresx);
+                                startActivity(x);
                                 return true;
 
                         }

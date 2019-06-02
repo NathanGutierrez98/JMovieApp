@@ -68,28 +68,6 @@ public class Pendientes extends AppCompatActivity {
         listPendientes = new ArrayList<Pelicula>();
         setContentView(R.layout.pendientes);
         ocultarUI();
-        findViewById(R.id.pendientes_content).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ocultarUI();
-            }
-        });
-        busqueda = findViewById(R.id.busqueda);
-
-        busqueda.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-                                            @Override
-                                            public boolean onQueryTextSubmit(String s) {
-                                               // metodoJSON();
-                                                return true;
-                                            }
-
-                                            @Override
-                                            public boolean onQueryTextChange(String s) {
-                                                return false;
-                                            }
-                                        }
-        );
-
         setToolbar(); // Setear Toolbar como action bar
 
         String[] valores = getIntent().getStringArrayExtra("nombreUsuario");
@@ -105,7 +83,7 @@ public class Pendientes extends AppCompatActivity {
         String correo[] = new String[1];
         correo[0] = nav_correo.getText().toString();
         apikey = cbd.getToken(correo[0]);
-        obtenerPeliculaFav(cargarPeliculasPendientes());
+
 
         if (navigationView != null) {
             setupDrawerContent(navigationView);
@@ -117,7 +95,7 @@ public class Pendientes extends AppCompatActivity {
         }
 
         inicializar();
-
+        obtenerPeliculaPen(cargarPeliculasPendientes());
 
     }
 
@@ -182,16 +160,15 @@ public class Pendientes extends AppCompatActivity {
     }
 
 
-    public void obtenerPeliculaFav(ArrayList<String> listaPelisFav) {
+    public void obtenerPeliculaPen(ArrayList<String> listaPelisPen) {
 
 
-        for (int i = 0; i < listaPelisFav.size(); i++) {
+        for (int i = 0; i < listaPelisPen.size(); i++) {
             final Pelicula[] pelicula = {null};
             final boolean[] encontrado = {false};
             String url = "http://www.omdbapi.com/";
-            String parametro = busqueda.getQuery().toString();
             String resultado;
-            String urlFinal = "http://www.omdbapi.com/?i=" + listaPelisFav.get(i) + "&apikey=" + apikey;
+            String urlFinal = "http://www.omdbapi.com/?i=" + listaPelisPen.get(i) + "&apikey=" + apikey;
             RequestQueue q = Volley.newRequestQueue(this);
 
             StringRequest stringRequest = new StringRequest(Request.Method.GET, urlFinal,
@@ -366,7 +343,7 @@ public class Pendientes extends AppCompatActivity {
 
     public ArrayList<String> cargarPeliculasPendientes(){
         ConexionBBDD cbd = new ConexionBBDD(this);
-        String nom[] =cbd.getIDusuario(nav_user.getText().toString());
+        String nom[] =cbd.getIDusuario(nav_correo.getText().toString());
 
 
        return cbd.getPendientes(nom[0]);

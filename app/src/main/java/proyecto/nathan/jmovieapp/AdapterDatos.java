@@ -80,7 +80,7 @@ public class AdapterDatos extends RecyclerView.Adapter<AdapterDatos.ViewHolderDa
                             case R.id.menuVer:
                                 cbd = new ConexionBBDD(view.getContext());
 
-                                cbd.anadirPendientes(nombreUsuario,listDatos.get(posicion).getId());
+                                cbd.anadirPendientes(correoUsuario,listDatos.get(posicion).getId());
 
                                 break;
                         }

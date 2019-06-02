@@ -28,16 +28,7 @@
             android:background="?attr/colorPrimary"
             android:theme="@style/ThemeOverlay.AppCompat.Dark"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
-        <SearchView
-            android:id="@+id/busqueda"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/blanco"
-            android:queryHint="Busque una pelicula o serie"
 
-            >
-
-        </SearchView>
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recyclerId"
