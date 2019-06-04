@@ -53,44 +53,6 @@ public class AdapterFavoritas extends RecyclerView.Adapter<AdapterFavoritas.View
     public void onBindViewHolder(@NonNull final AdapterFavoritas.ViewHolderDatos viewHolderDatos, int i) {
         viewHolderDatos.asignarDatos(listFavoritas.get(i));
         final int posicion = i;
-        viewHolderDatos.buttonViewOption.setOnClickListener(new View.OnClickListener() {
-
-       ViewHolderDatos v = viewHolderDatos;
-            @Override
-            public void onClick(final View view) {
-
-                //creating a popup menu
-                PopupMenu popup = new PopupMenu(mCtx, v.buttonViewOption);
-                //inflating menu from xml resource
-                popup.inflate(R.menu.opcion_menu_fav);
-                //adding click listener
-                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                    @Override
-                    public boolean onMenuItemClick(MenuItem item) {
-                        switch (item.getItemId()) {
-                            case R.id.menuBorrar:
-                                ConexionBBDD cbd = new ConexionBBDD(view.getContext());
-                                String [] id = cbd.getIDusuario(correoUsuario);
-                                cbd.eliminarFavorita(id[0],listFavoritas.get(posicion).getId());
-                                listFavoritas.remove(posicion);
-                                notifyDataSetChanged();
-
-                                break;
-                            case R.id.menuVer:
-                                //handle menu3 click
-                                break;
-                        }
-                        return false;
-                    }
-                });
-                //displaying the popup
-                popup.show();
-
-            }
-        });
-
-
-
 
     }
 
@@ -131,6 +93,7 @@ public class AdapterFavoritas extends RecyclerView.Adapter<AdapterFavoritas.View
             imagen = itemView.findViewById(R.id.imagen);
             titulo = itemView.findViewById(R.id.titulo);
             buttonViewOption = (TextView) itemView.findViewById(R.id.textViewOptions);
+            buttonViewOption.setVisibility(View.INVISIBLE);
         }
 
 

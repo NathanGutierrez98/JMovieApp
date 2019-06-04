@@ -35,6 +35,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 
 public class Pendientes extends AppCompatActivity {
@@ -113,6 +114,23 @@ public class Pendientes extends AppCompatActivity {
         recycler.setAdapter(adaptador);
         recycler.setHasFixedSize(true);
 
+        ItemTouchHelper mover = new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(ItemTouchHelper.UP | ItemTouchHelper.DOWN, 0) {
+
+            @Override
+            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder actual, @NonNull RecyclerView.ViewHolder seleccionada) {
+                int posicionActual = actual.getAdapterPosition();
+                int posicionSeleccionada = seleccionada.getAdapterPosition();
+                Collections.swap(listPendientes, posicionActual, posicionSeleccionada);
+                adaptador.notifyItemMoved(posicionActual, posicionSeleccionada);
+                return false;
+            }
+            @Override
+            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
+
+            }
+
+        });
+        mover.attachToRecyclerView(recycler);
 
         final ItemTouchHelper eliminar = new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
             @Override
@@ -285,6 +303,12 @@ public class Pendientes extends AppCompatActivity {
                                 startActivity(z);
                                 return true;
 
+                            case "Cerrar Sesión":
+                                // finish();
+                                Intent l = new Intent(navigationView.getContext(),LoginUsuario.class);
+                                startActivity(l);
+                                return true;
+
 
 
                         }
@@ -321,14 +345,6 @@ public class Pendientes extends AppCompatActivity {
 
 
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        if (!drawerLayout.isDrawerOpen(GravityCompat.START)) {
-            getMenuInflater().inflate(R.menu.main, menu);
-            return true;
-        }
-        return super.onCreateOptionsMenu(menu);
-    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

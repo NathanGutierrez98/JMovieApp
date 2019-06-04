@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimary">#F4B244</color>
     <color name="gris">#556270</color>
-    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorPrimaryDark">#CC9A50</color>
     <color name="colorAccent">#D81B60</color>
     <color name="colorFondo">#8b2e33</color>
     <color name="blanco">#ffffff</color>
@@ -30,6 +30,10 @@
         <item>#FF5252</item>
         <item>#CCFF90</item>
         <item>#E040FB</item>
+        <item>#FF5252</item>
+        <item>#CCFF90</item>
+        <item>#E040FB</item>
+        <item>#FF5252</item>
     </array>
     <color name="viewBg">#f1f5f8</color>
 </resources>

@@ -310,6 +310,12 @@ public class Favoritas extends AppCompatActivity {
                                 startActivity(x);
                                 return true;
 
+                            case "Cerrar Sesión":
+                                // finish();
+                                Intent l = new Intent(navigationView.getContext(),LoginUsuario.class);
+                                startActivity(l);
+                                return true;
+
                         }
 
                         return true;
@@ -344,14 +350,8 @@ public class Favoritas extends AppCompatActivity {
 
 
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        if (!drawerLayout.isDrawerOpen(GravityCompat.START)) {
-            getMenuInflater().inflate(R.menu.main, menu);
-            return true;
-        }
-        return super.onCreateOptionsMenu(menu);
-    }
+
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

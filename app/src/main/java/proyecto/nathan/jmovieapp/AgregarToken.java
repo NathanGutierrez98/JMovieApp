@@ -35,6 +35,7 @@ public class AgregarToken extends AppCompatActivity {
                     try {
                         Thread.sleep(1000);
                         Intent i  = new Intent(getApplicationContext(), MainActivity.class);
+                        i.putExtra("nombreUsuario",correoUsuario);
                         startActivity(i);
                     } catch (InterruptedException e) {
 

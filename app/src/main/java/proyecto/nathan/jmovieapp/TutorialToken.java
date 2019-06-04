@@ -2,6 +2,7 @@ package proyecto.nathan.jmovieapp;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -38,6 +39,9 @@ public class TutorialToken extends AppCompatActivity {
                 R.layout.intro_screen1,
                 R.layout.intro_screen2,
                 R.layout.intro_screen3,
+                R.layout.intro_screen4,
+                R.layout.intro_screen6
+
         };
         myvpAdapter = new MyViewPagerAdapter();
         vp.setAdapter(myvpAdapter);
@@ -71,10 +75,10 @@ public class TutorialToken extends AppCompatActivity {
             bottomBars[i].setTextSize(100);
             bottomBars[i].setText(Html.fromHtml("&#175"));
             Layout_bars.addView(bottomBars[i]);
-            bottomBars[i].setTextColor(colorsInactive[thisScreen]);
+            //bottomBars[i].setTextColor(Color.);
         }
-        if (bottomBars.length > 0)
-            bottomBars[thisScreen].setTextColor(colorsActive[thisScreen]);
+        //if (bottomBars.length > 0)
+          //  bottomBars[thisScreen].setTextColor(colorsActive[thisScreen]);
     }
 
     private int getItem(int i) {
@@ -93,7 +97,7 @@ public class TutorialToken extends AppCompatActivity {
         public void onPageSelected(int position) {
             ColoredBars(position);
             if (position == screens.length - 1) {
-                Next.setText("start");
+                Next.setText("Comenzar");
                 Skip.setVisibility(View.GONE);
             } else {
                 Next.setText(getString(R.string.next));

@@ -22,6 +22,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.SearchView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -120,7 +121,15 @@ public class MainActivity extends AppCompatActivity {
         ConexionBBDD cbd = new ConexionBBDD(this);
         String correo[] = new String[1];
         correo[0] = nav_correo.getText().toString();
-        apikey = cbd.getToken(correo[0]);
+        try{
+            apikey = cbd.getToken(correo[0]);
+            if(apikey ==null){
+                Toast.makeText(this,"No tienes una APIKEY enlazada a tu cuenta",Toast.LENGTH_LONG).show();
+            }
+        }catch (Exception e){
+
+        }
+
 
 
     }
@@ -378,6 +387,12 @@ public class MainActivity extends AppCompatActivity {
                                 startActivity(z);
                                 return true;
 
+                            case "Cerrar Sesión":
+                               // finish();
+                                Intent l = new Intent(navigationView.getContext(),LoginUsuario.class);
+                                startActivity(l);
+                                return true;
+
                         }
 
                         return true;
@@ -411,14 +426,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        if (!drawerLayout.isDrawerOpen(GravityCompat.START)) {
-            getMenuInflater().inflate(R.menu.main, menu);
-            return true;
-        }
-        return super.onCreateOptionsMenu(menu);
-    }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

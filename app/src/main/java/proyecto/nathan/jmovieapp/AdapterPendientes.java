@@ -62,22 +62,18 @@ public class AdapterPendientes extends RecyclerView.Adapter<AdapterPendientes.Vi
                 //creating a popup menu
                 PopupMenu popup = new PopupMenu(mCtx, v.buttonViewOption);
                 //inflating menu from xml resource
-                popup.inflate(R.menu.opcion_menu_fav);
+                popup.inflate(R.menu.opcion_menu_pen);
                 //adding click listener
                 popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
                         switch (item.getItemId()) {
-                            case R.id.menuBorrar:
-                                ConexionBBDD cbd = new ConexionBBDD(view.getContext());
-                                String [] id = cbd.getIDusuario(correoUsuario);
-                                cbd.eliminarFavorita(id[0],listPendientes.get(posicion).getId());
-                                listPendientes.remove(posicion);
-                                notifyDataSetChanged();
 
-                                break;
-                            case R.id.menuVer:
-                                //handle menu3 click
+                            case R.id.fav:
+                                ConexionBBDD cbdf = new ConexionBBDD(view.getContext());
+                                String [] ids = cbdf.getIDusuario(correoUsuario);
+                                cbdf.anadirFavoritas(correoUsuario,listPendientes.get(posicion).getId());
+                                notifyDataSetChanged();
                                 break;
                         }
                         return false;
@@ -89,11 +85,7 @@ public class AdapterPendientes extends RecyclerView.Adapter<AdapterPendientes.Vi
             }
         });
 
-
-
-
     }
-
     @Override
     public int getItemCount() {
 
