@@ -2,6 +2,7 @@ package proyecto.nathan.jmovieapp;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.StrictMode;
@@ -17,7 +18,6 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.support.v7.widget.helper.ItemTouchHelper;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -30,10 +30,13 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -110,7 +113,13 @@ public class Pendientes extends AppCompatActivity {
                 DividerItemDecoration.VERTICAL);
 
         recycler.addItemDecoration(dividerItemDecoration);
-        adaptador = new AdapterPendientes(listPendientes, this, nav_user.getText().toString(), nav_correo.getText().toString());
+        if(cargarInformacion().size() != 0) {
+            listPendientes = cargarInformacion();
+            adaptador = new AdapterPendientes(listPendientes,this,nav_user.getText().toString(), nav_correo.getText().toString());
+        }else{
+            adaptador = new AdapterPendientes(listPendientes, this, nav_user.getText().toString(), nav_correo.getText().toString());
+        }
+
         recycler.setAdapter(adaptador);
         recycler.setHasFixedSize(true);
 
@@ -122,6 +131,7 @@ public class Pendientes extends AppCompatActivity {
                 int posicionSeleccionada = seleccionada.getAdapterPosition();
                 Collections.swap(listPendientes, posicionActual, posicionSeleccionada);
                 adaptador.notifyItemMoved(posicionActual, posicionSeleccionada);
+                guardarInformacion();
                 return false;
             }
             @Override
@@ -160,6 +170,7 @@ public class Pendientes extends AppCompatActivity {
                             snackbar.show();
                             recuperada[0] = true;
 
+
                         }
                     });
                     if(recuperada[0] == false){
@@ -173,10 +184,45 @@ public class Pendientes extends AppCompatActivity {
 
             }
         });
+        guardarInformacion();
         eliminar.attachToRecyclerView(recycler);
         recycler.setAdapter(adaptador);
     }
 
+    public void guardarInformacion(){
+        SharedPreferences sharedP = getSharedPreferences("guardarPendientes", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedP.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(listPendientes);
+        ConexionBBDD cbd = new ConexionBBDD(this);
+        String id [] = cbd.getIDusuario(nav_correo.getText().toString());
+        editor.putString("id",""+ id[0]);
+        editor.putString("listaPendientes", json);
+        editor.apply();
+        listenerAdaptador();
+    }
+    public ArrayList<Pelicula> cargarInformacion(){
+
+        SharedPreferences sharedP = getSharedPreferences("guardarPendientes", MODE_PRIVATE);
+        Gson gson = new Gson();
+        ConexionBBDD cbd = new ConexionBBDD(this);
+        String idActual [] = cbd.getIDusuario(nav_correo.getText().toString());
+        String id =sharedP.getString("id", null);
+
+        if(id.equals(idActual[0])) {
+
+            String json = sharedP.getString("listaPendientes", null);
+            Type type = new TypeToken<ArrayList<Pelicula>>() {
+            }.getType();
+            listPendientes = gson.fromJson(json, type);
+            if (listPendientes == null) {
+                listPendientes = new ArrayList<Pelicula>();
+            }
+        }
+            return listPendientes;
+
+
+    }
 
     public void obtenerPeliculaPen(ArrayList<String> listaPelisPen) {
 
@@ -224,6 +270,12 @@ public class Pendientes extends AppCompatActivity {
             q.add(stringRequest);
         }
 
+
+
+
+    }
+
+    private void listenerAdaptador(){
         adaptador.setOnClickLisetner(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -236,10 +288,7 @@ public class Pendientes extends AppCompatActivity {
             }
 
         });
-
-
     }
-
 
 
     public void ocultarUI(){
@@ -340,7 +389,9 @@ public class Pendientes extends AppCompatActivity {
         }catch (JSONException e){
 
         }
+        guardarInformacion();
         return peli;
+
     }
 
 

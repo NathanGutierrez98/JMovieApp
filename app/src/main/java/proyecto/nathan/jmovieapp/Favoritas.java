@@ -2,6 +2,7 @@ package proyecto.nathan.jmovieapp;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.StrictMode;
@@ -30,11 +31,14 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -93,7 +97,7 @@ public class Favoritas extends AppCompatActivity {
         if (savedInstanceState == null) {
 
         }
-
+        cargarInformacion();
         inicializar();
         ConexionBBDD cbd = new ConexionBBDD(this);
         String correo[] = new String[1];
@@ -128,7 +132,7 @@ public class Favoritas extends AppCompatActivity {
                 int posicionSeleccionada = seleccionada.getAdapterPosition();
                 Collections.swap(listaFavoritas, posicionActual, posicionSeleccionada);
                 adaptador.notifyItemMoved(posicionActual, posicionSeleccionada);
-
+                guardarInformacion();
                 return false;
             }
 
@@ -181,11 +185,59 @@ public class Favoritas extends AppCompatActivity {
 
             }
         });
+
         eliminar.attachToRecyclerView(recycler);
         recycler.setAdapter(adaptador);
+        guardarInformacion();
     }
+    public void guardarInformacion(){
+        SharedPreferences sharedP = getSharedPreferences("guardarFavoritas", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedP.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(listaFavoritas);
+        ConexionBBDD cbd = new ConexionBBDD(this);
+        String id [] = cbd.getIDusuario(nav_correo.getText().toString());
+        editor.putString("id",""+ id[0]);
+        editor.putString("listaFavoritas", json);
+        editor.apply();
+        listenerAdaptador();
+    }
+    public ArrayList<Pelicula> cargarInformacion(){
+
+        SharedPreferences sharedP = getSharedPreferences("guardarFavoritas", MODE_PRIVATE);
+        Gson gson = new Gson();
+        ConexionBBDD cbd = new ConexionBBDD(this);
+        String idActual [] = cbd.getIDusuario(nav_correo.getText().toString());
+        String id =sharedP.getString("id", null);
+
+        if(id.equals(idActual[0])) {
+
+            String json = sharedP.getString("listaFavoritas", null);
+            Type type = new TypeToken<ArrayList<Pelicula>>() {
+            }.getType();
+            listaFavoritas = gson.fromJson(json, type);
+            if (listaFavoritas == null) {
+                listaFavoritas = new ArrayList<Pelicula>();
+            }
+        }
+        return listaFavoritas;
 
 
+    }
+    private void listenerAdaptador(){
+        adaptador.setOnClickLisetner(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Pelicula p = listFavoritas.get(recycler.getChildAdapterPosition(v));
+
+                Intent i = new Intent(v.getContext(), ActividadMostrarPelicula.class);
+
+                i.putExtra("Pelicula", p);
+                v.getContext().startActivity(i);
+            }
+
+        });
+    }
     public void obtenerPeliculaFav(ArrayList<String> listaPelisFav) {
 
 
@@ -345,6 +397,7 @@ public class Favoritas extends AppCompatActivity {
         }catch (JSONException e){
 
         }
+        guardarInformacion();
         return peli;
     }
 
