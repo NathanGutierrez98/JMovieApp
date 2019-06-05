@@ -99,7 +99,9 @@ public class Pendientes extends AppCompatActivity {
         }
 
         inicializar();
+
         obtenerPeliculaPen(cargarPeliculasPendientes());
+
 
     }
 
@@ -207,7 +209,7 @@ public class Pendientes extends AppCompatActivity {
         Gson gson = new Gson();
         ConexionBBDD cbd = new ConexionBBDD(this);
         String idActual [] = cbd.getIDusuario(nav_correo.getText().toString());
-        String id =sharedP.getString("id", null);
+        String id =sharedP.getString("id", "");
 
         if(id.equals(idActual[0])) {
 

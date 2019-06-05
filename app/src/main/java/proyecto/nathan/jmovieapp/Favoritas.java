@@ -97,8 +97,10 @@ public class Favoritas extends AppCompatActivity {
         if (savedInstanceState == null) {
 
         }
+
         cargarInformacion();
         inicializar();
+
         ConexionBBDD cbd = new ConexionBBDD(this);
         String correo[] = new String[1];
         correo[0] = nav_correo.getText().toString();
@@ -208,7 +210,7 @@ public class Favoritas extends AppCompatActivity {
         Gson gson = new Gson();
         ConexionBBDD cbd = new ConexionBBDD(this);
         String idActual [] = cbd.getIDusuario(nav_correo.getText().toString());
-        String id =sharedP.getString("id", null);
+        String id =sharedP.getString("id", "");
 
         if(id.equals(idActual[0])) {
 
