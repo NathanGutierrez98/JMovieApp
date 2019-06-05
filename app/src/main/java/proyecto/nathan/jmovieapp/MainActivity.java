@@ -195,7 +195,7 @@ public class MainActivity extends AppCompatActivity {
         String resultado;
         String urlFinal = "http://www.omdbapi.com/?s=" + parametro + "&apikey="+ apikey;
         RequestQueue q = Volley.newRequestQueue(this);
-
+       listaPelis.clear();
         StringRequest stringRequest = new StringRequest(Request.Method.GET, urlFinal,
                 new Response.Listener<String>() {
                     @Override
