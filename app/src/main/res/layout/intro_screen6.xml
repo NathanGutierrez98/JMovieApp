@@ -22,7 +22,7 @@
         android:layout_marginTop="40dp"
         android:layout_marginBottom="2dp"
         android:fontFamily="sans-serif"
-        android:text="Finalmente añade la API KEY recibida en el correo"
+        android:text="Finalmente añade la API KEY "
         android:textAlignment="center"
         android:textColor="@android:color/white"
         android:textSize="24sp"

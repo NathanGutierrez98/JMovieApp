@@ -22,7 +22,7 @@
         android:layout_marginTop="40dp"
         android:layout_marginBottom="3dp"
         android:fontFamily="sans-serif"
-        android:text="Despliega el menú lateral y haz tap en Añadir API KEY"
+        android:text="Despliega el menú lateral"
         android:textAlignment="center"
         android:textColor="@android:color/white"
         android:textSize="24sp"
@@ -30,8 +30,8 @@
 
     <ImageView
         android:id="@+id/imageView6"
-        android:layout_width="323dp"
-        android:layout_height="424dp"
+        android:layout_width="276dp"
+        android:layout_height="371dp"
         android:layout_centerInParent="true"
         android:src="@drawable/apikey"
         app:srcCompat="@drawable/apikey"

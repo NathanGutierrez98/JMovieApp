@@ -367,6 +367,7 @@ public class Favoritas extends AppCompatActivity {
                             case "Cerrar Sesión":
                                 // finish();
                                 Intent l = new Intent(navigationView.getContext(),LoginUsuario.class);
+                                finish();
                                 startActivity(l);
                                 return true;
 

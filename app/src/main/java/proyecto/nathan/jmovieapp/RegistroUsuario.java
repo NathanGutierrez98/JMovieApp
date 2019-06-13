@@ -3,6 +3,8 @@ package proyecto.nathan.jmovieapp;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -73,18 +75,45 @@ private Button btnRegistro;
             if( comprobarContrasenias() && comprobarUsuario() && comprobarVacios()){
                 Usuario usuario = new Usuario(txtUsuario.getText().toString(), txtNombre.getText().toString(), txtApellidos.getText().toString(), txtPass1.getText().toString(), txtCorreo.getText().toString());
                 ConexionBBDD cbdd = new ConexionBBDD(getApplicationContext());
-                String resultado = cbdd.guardar(usuario);
-                Toast.makeText(getBaseContext(), resultado,
-                        Toast.LENGTH_LONG).show();
-                if(resultado.equals("Registrado correctamente, ya puede iniciar sesión")){
+
+
 
                     obtenerToken(usuario);
+
+                if(comprobarInternet(this)){
+                    String resultado = cbdd.guardar(usuario);
+                    Toast.makeText(getBaseContext(), resultado,
+                            Toast.LENGTH_LONG).show();
+                }else{
+                    Toast.makeText(getBaseContext(), "No tienes conexión a internet",
+                            Toast.LENGTH_LONG).show();
                 }
+
+
+
+
+
+
+
+
+
+
+
+
                 cbdd.close();
 
             }
 
 
+    }
+
+    private boolean comprobarInternet(Context context){
+
+            ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+            return networkInfo != null && networkInfo.isAvailable() &&
+
+                    networkInfo.isConnected();
     }
 
     private boolean comprobarUsuario() {
@@ -110,18 +139,22 @@ private Button btnRegistro;
         return true;
     }
 
-    private void obtenerToken(Usuario usuario){
+    private String obtenerToken(Usuario usuario){
         String url = "http://www.omdbapi.com/apikey.aspx?__VIEWSTATE=%2FwEPDwUKLTIwNDY4MTIzNQ9kFgYCAQ9kFggCAQ8QDxYCHgdDaGVja2VkaGRkZGQCAw8QDxYCHwBnZGRkZAIFDxYCHgdWaXNpYmxlaGQCBw8WAh8BZ2QCAg8WAh8BZxYCAgEPDxYCHgRUZXh0BUtBIHZlcmlmaWNhdGlvbiBsaW5rIHRvIGFjdGl2YXRlIHlvdXIga2V5IHdhcyBzZW50IHRvOiBuYXRoYW5ndXQ5OEBnbWFpbC5jb21kZAIDDxYCHwFoZBgBBR5fX0NvbnRyb2xzUmVxdWlyZVBvc3RCYWNrS2V5X18WAwULcGF0cmVvbkFjY3QFC3BhdHJlb25BY2N0BQhmcmVlQWNjdDckTIIITKzdw3r%2BfWhkbZE%2BtCAG4rQpx8arAzbus0ht&__VIEWSTATEGENERATOR=5E550F58&__EVENTVALIDATION=%2FwEdAAj09WVq39%2FmYiBQWH0q7TeQmSzhXfnlWWVdWIamVouVTzfZJuQDpLVS6HZFWq5fYphdL1XrNEjnC%2FKjNya%2Bmqh8hRPnM5dWgso2y7bj7kVNLSFbtYIt24Lw6ktxrd5Z67%2F4LFSTzFfbXTFN5VgQX9Nbzfg78Z8BXhXifTCAVkevd%2FNWy%2BK4CxZOz5c%2Fli8qlS7FL2aBd9SS6XAIAaB8oDW0&at=freeAcct&Email2="+usuario.getCorreo() + "&FirstName="+usuario.getNombre() +"&LastName=" + usuario.getApellidos() + "&TextArea1=Usoeducativo&Button1=Submit";
 
-
+        boolean entra = false;
         RequestQueue q = Volley.newRequestQueue(this);
+        final String[] respuesta = new String[1];
+        respuesta[0] = "";
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                String a = response;
-
+               respuesta[0] = response;
+                        Intent i = new Intent(RegistroUsuario.this, TutorialToken.class);
+                        startActivity(i);
+                        finish();
 
                     }
                 },
@@ -133,12 +166,12 @@ private Button btnRegistro;
                 }
 
         );
-
         q.add(stringRequest);
 
-        Intent i = new Intent(RegistroUsuario.this, TutorialToken.class);
-        startActivity(i);
-        finish();
+
+
+    return respuesta[0];
     }
+
 }
 
